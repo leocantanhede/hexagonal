@@ -21,11 +21,31 @@ public class CustomerService implements CustomerInputPort {
 		Address address = this.addressOutputPort.find(zipCode);
 		customer.setAddress(address);
 		this.customerOutputPort.insert(customer);
+		this.send(customer.getCpf());
 	}
 	
 	@Override
 	public Customer find(String id) {
 		return this.customerOutputPort.find(id).orElseThrow(() -> new RuntimeException("Customer not found!"));
+	}
+	
+	@Override
+	public void update(Customer customer, String zipCode) {
+		this.find(customer.getId());
+		Address address = this.addressOutputPort.find(zipCode);
+		customer.setAddress(address);
+		this.customerOutputPort.update(customer);
+	}
+	
+	@Override
+	public void delete(String id) {
+		this.find(id);
+		this.customerOutputPort.delete(id);
+	}
+	
+	@Override
+	public void send(String cpf) {
+		this.customerOutputPort.send(cpf);
 	}
 	
 }

@@ -6,5 +6,8 @@ public interface CustomerInputPort {
 
 	void insert(Customer customer, String zipCode);
 	Customer find(String id);
+	void update(Customer customer, String zipCode);
+	void delete(String id);
+	void send(String cpf);
 	
 }

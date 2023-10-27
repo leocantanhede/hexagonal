@@ -8,5 +8,8 @@ public interface CustomerOutputPort {
 
 	void insert(Customer customer);
 	Optional<Customer> find(String id);
+	void update(Customer customer);
+	void delete(String id);
+	void send(String cpf);
 	
 }
