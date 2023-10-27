@@ -17,7 +17,7 @@ public class ValidatedCpfConsumer {
 	@Autowired
 	private MessageMapper mapper;
 	
-	@KafkaListener(topics = "tp-cpf-validate", groupId = "lunasoft")
+	@KafkaListener(topics = "tp-cpf-validated", groupId = "lunasoft", containerFactory = "kafkaListenerContainerFactory")
 	public void receive(CustomerMessage message) {
 		this.inputPort.update(this.mapper.toDomain(message), message.getZipCode());
 	}
